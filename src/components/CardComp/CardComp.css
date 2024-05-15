@@ -1,0 +1,44 @@
+.cardLayout {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+.cardInfo {
+  display: flex;
+  margin-left: 15px;
+  flex-direction: column;
+}
+
+.cardTitle {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.cardCont {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.cardBtns {
+  width: 90%;
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  justify-content: space-around;
+}
+
+.cardDelete {
+  width: 100px;
+  height: 30px;
+}
+
+.cardBtn {
+  width: 100px;
+  height: 30px;
+}
