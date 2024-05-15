@@ -34,8 +34,21 @@ const App = () => {
     const updatedTodo = updatedTodoList.filter(item => !item.isDone);
     const updatedDone = updatedTodoList.filter(item => item.isDone);
     setTodo(updatedTodo);
-    setDone([...done, ...updatedDone]);
+    setDone(prevDone => [...prevDone, ...updatedDone]);
   };
+
+  const toggleCancle = (id) => {
+    const updatedDoneList = done.map((item) => {
+      if (item.id === id) {
+        return { ...item, isDone: !item.isDone };
+      }
+      return item;
+    });
+    const updatedTodo = updatedDoneList.filter(item => !item.isDone);
+    const updatedDone = updatedDoneList.filter(item => item.isDone);
+    setTodo(prevTodo => [...prevTodo, ...updatedTodo]);
+    setDone(updatedDone);
+  }
 
   const onRemove = id => {
     setTodo(todo.filter(cards => cards.id !== id));
@@ -56,7 +69,8 @@ const App = () => {
         <ListComp 
           todo={todo} 
           done={done} 
-          toggleDone={toggleDone} 
+          toggleDone={toggleDone}
+          toggleCancle={toggleCancle}
           onRemove={onRemove} 
         />
 

@@ -2,7 +2,7 @@ import React from 'react';
 import CardComp from '../CardComp/CardComp';
 import "./ListComp.css"
 
-const ListComp = ({ todo, done, toggleDone, onRemove }) => {
+const ListComp = ({ todo, done, toggleDone, toggleCancle, onRemove }) => {
   return (
     <React.Fragment>
       <div className='workingList'>
@@ -17,6 +17,7 @@ const ListComp = ({ todo, done, toggleDone, onRemove }) => {
                 content={cards.cont}
                 onRemove={onRemove}
                 toggleDone={() => toggleDone(cards.id)}
+                state={"완료"}
               />
             ))}
           </div>
@@ -34,6 +35,8 @@ const ListComp = ({ todo, done, toggleDone, onRemove }) => {
                 title={cards.title} 
                 content={cards.cont}
                 onRemove={onRemove}
+                toggleCancle={() => toggleCancle(cards.id)}
+                state={"취소"}
               />
             ))}
           </div>

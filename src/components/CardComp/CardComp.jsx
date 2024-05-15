@@ -8,7 +8,15 @@ const GlobalStyle = createGlobalStyle`
 `
 
 
-const CardComp = ({id, title, content, toggleDone, onRemove}) => {
+const CardComp = ({id, title, content, toggleDone, toggleCancle, onRemove, state}) => {
+  const handleClick = () => {
+    if (state === '완료') {
+      toggleDone(id);
+    } else if (state === '취소') {
+      toggleCancle(id);
+    }
+  };
+
   return (
     <React.Fragment>
       <GlobalStyle />
@@ -20,7 +28,7 @@ const CardComp = ({id, title, content, toggleDone, onRemove}) => {
 
         <div className='cardBtns'>
           <button className='cardDelete' onClick={() => onRemove(id)}>삭제하기</button>
-          <button className='cardBtn' onClick={toggleDone}>완료</button>
+          <button className='cardBtn' onClick={handleClick}>{state}</button>
         </div>
       </div>
     </React.Fragment>
