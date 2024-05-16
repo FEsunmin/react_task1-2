@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import "./App.css";
+import Swal from "sweetalert2";
 import FormComp from "./components/FormComp/FormComp";
 import ListComp from "./components/TodoListComp/ListComp";
 import ScrollTopComp from "./components/ScrollComp/ScrollTopComp";
@@ -16,7 +17,11 @@ const App = () => {
 
   const addList = (newTodo) => {
     if (!newTodo.title || !newTodo.cont) {
-      alert("이름과 나이 모두 입력해주세요");
+      Swal.fire({
+        title: "Error!",
+        text: "이름과 나이 모두 입력해주세요",
+        confirmButtonText: "확인",
+      });
       return;
     }
 
