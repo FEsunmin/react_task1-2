@@ -4,6 +4,7 @@ import reset from 'styled-reset';
 import './App.css';
 import FormComp from './components/FormComp/FormComp';
 import ListComp from './components/TodoListComp/ListComp';
+import ScrollTopComp from './components/ScrollComp/ScrollTopComp';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -78,6 +79,8 @@ const App = () => {
           toggleCancle={toggleCancle}
           onRemove={onRemove} 
         />
+
+        <ScrollTopComp />
 
       </div>
     </React.Fragment>

@@ -1,0 +1,21 @@
+.scrollBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  background-color: var(--scroll-btn);
+  color: white;
+  position: fixed;
+  bottom: 30px;
+  right: 80px;
+  cursor: pointer;
+  z-index: 4;
+
+  border: none;
+  border-radius: 50px;
+  background-color: black;
+}
+
+.scroll {
+  font-size: 30px;
+  color: white;
+}
