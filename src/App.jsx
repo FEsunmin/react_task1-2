@@ -14,6 +14,11 @@ const App = () => {
   const [done, setDone] = useState([]);
 
   const addList = (newTodo) => {
+    if (!newTodo.title || !newTodo.cont) {
+      alert("이름과 나이 모두 입력해주세요");
+      return;
+    } 
+
     const id = Date.now();
     const todoInfo = {
       id: id,

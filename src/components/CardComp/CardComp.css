@@ -18,6 +18,14 @@
 .cardTitle {
   margin-top: 20px;
   font-size: 20px;
+  font-weight: 700;
+}
+
+.sectionLine {
+  width: 100%;
+  border: 1px solid lightgray;
+  margin-left: -10px;
+  margin-top: 10px;
 }
 
 .cardCont {
@@ -36,9 +44,19 @@
 .cardDelete {
   width: 100px;
   height: 30px;
+
+  color: white;
+  background-color: rgb(197, 78, 78);
+  border: none;
+  border-radius: 5px;
 }
 
 .cardBtn {
   width: 100px;
   height: 30px;
+
+  color: white;
+  background-color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
 }

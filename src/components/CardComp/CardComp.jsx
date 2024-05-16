@@ -23,6 +23,7 @@ const CardComp = ({id, title, content, toggleDone, toggleCancle, onRemove, state
       <div className='cardLayout'>
         <div className='cardInfo'>
           <h2 className='cardTitle'>{title}</h2>
+          <div className='sectionLine'></div>
           <h3 className='cardCont'>{content}</h3>
         </div>
 
