@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import "./App.css";
@@ -15,7 +15,7 @@ const App = () => {
   const [todo, setTodo] = useState([]);
   const [done, setDone] = useState([]);
 
-  const addList = (newTodo) => {
+  const addList = useCallback((newTodo) => {
     if (!newTodo.title || !newTodo.cont) {
       Swal.fire({
         title: "Error!",
@@ -32,39 +32,63 @@ const App = () => {
       cont: newTodo.cont,
       isDone: false,
     };
-    setTodo([...todo, todoInfo]);
-  };
+    setTodo((prevTodo) => [...prevTodo, todoInfo]);
+  }, []);
 
-  const toggleDone = (id) => {
-    const updatedTodoList = todo.map((item) => {
-      if (item.id === id) {
-        return { ...item, isDone: !item.isDone };
+  const updateLists = (list) => {
+    const updatedTodo = [];
+    const updatedDone = [];
+
+    for (const item of list) {
+      if (item.isDone) {
+        updatedDone.push(item);
+      } else {
+        updatedTodo.push(item);
       }
-      return item;
-    });
-    const updatedTodo = updatedTodoList.filter((item) => !item.isDone);
-    const updatedDone = updatedTodoList.filter((item) => item.isDone);
-    setTodo(updatedTodo);
-    setDone((prevDone) => [...prevDone, ...updatedDone]);
+    }
+
+    return [updatedTodo, updatedDone];
   };
 
-  const toggleCancle = (id) => {
-    const updatedDoneList = done.map((item) => {
-      if (item.id === id) {
-        return { ...item, isDone: !item.isDone };
-      }
-      return item;
-    });
-    const updatedTodo = updatedDoneList.filter((item) => !item.isDone);
-    const updatedDone = updatedDoneList.filter((item) => item.isDone);
-    setTodo((prevTodo) => [...prevTodo, ...updatedTodo]);
-    setDone(updatedDone);
-  };
+  const toggleDone = useCallback(
+    (id) => {
+      const updatedTodoList = todo.map((item) => {
+        if (item.id === id) {
+          return { ...item, isDone: !item.isDone };
+        }
+        return item;
+      });
 
-  const onRemove = (id) => {
-    setTodo(todo.filter((cards) => cards.id !== id));
-    setDone(done.filter((cards) => cards.id !== id));
-  };
+      const [updatedTodo, updatedDone] = updateLists(updatedTodoList);
+      setTodo(updatedTodo);
+      setDone((prevDone) => [...updatedDone, ...prevDone]);
+    },
+    [todo]
+  );
+
+  const toggleCancle = useCallback(
+    (id) => {
+      const updatedDoneList = done.map((item) => {
+        if (item.id === id) {
+          return { ...item, isDone: !item.isDone };
+        }
+        return item;
+      });
+
+      const [updatedTodo, updatedDone] = updateLists(updatedDoneList);
+      setTodo((prevTodo) => [...prevTodo, ...updatedTodo]);
+      setDone(updatedDone);
+    },
+    [done]
+  );
+
+  const onRemove = useCallback((id) => {
+    setTodo((prevTodo) => prevTodo.filter((cards) => cards.id !== id));
+    setDone((prevDone) => prevDone.filter((cards) => cards.id !== id));
+  }, []);
+
+  const todoList = useMemo(() => todo, [todo]);
+  const doneList = useMemo(() => done, [done]);
 
   return (
     <React.Fragment>
@@ -77,8 +101,8 @@ const App = () => {
         <FormComp addList={addList} />
 
         <ListComp
-          todo={todo}
-          done={done}
+          todo={todoList}
+          done={doneList}
           toggleDone={toggleDone}
           toggleCancle={toggleCancle}
           onRemove={onRemove}
