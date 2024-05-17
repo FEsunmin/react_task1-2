@@ -54,7 +54,7 @@ const App = () => {
     (id) => {
       const updatedTodoList = todo.map((item) => {
         if (item.id === id) {
-          return { ...item, isDone: !item.isDone };
+          item.isDone = !item.isDone;
         }
         return item;
       });
